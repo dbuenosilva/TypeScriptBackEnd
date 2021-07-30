@@ -16,7 +16,7 @@
 // Defining a array to save the medication control objects.
 var medicationRecords = new Array();
 // Creating the ts variable table to access the html content
-var viewMedicationTable = document.getElementById("MedicationsTable");
+var viewMedicationTable = document.getElementById("medicationTable");
 // Method to add a new medication
 function addMedication() {
     // Define local variables and casting the content from HTML file.
@@ -39,4 +39,7 @@ function addMedication() {
     nameCol.innerHTML = medicationName;
     doseCol.innerHTML = String(dailyDose);
     repeatsCol.innerHTML = String(numberOfRepeats);
+}
+function notifyUser() {
+    alert("test");
 }

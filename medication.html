@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title>Medications control</title>
+      <title>Medications control</title>  
+
+      <!-- loading javascript created automatically by medication.ts type script -->
+      <script defer src="medication.js" language="javascript" type="text/javascript"></script> 
    </head>
    <body>
+
         <h1>Medications control</h1>
       
         <p>Display record</p>
-        <table id="MedicationsTable">
+        <table id="medicationTable"></table>
         <br><br>
         <p>Add record</p>
-            <input type="text" style="border: 1px;" id="identifier">
-            <input type="text" style="border: 1px;" id="medicationName">
-            <input type="text" style="border: 1px;" id="dailyDose">
-            <input type="text" style="border: 1px;" id="numberOfRepeats">
+            <input type="text" id="identifier">
+            <input type="text" id="medicationName">
+            <input type="text" id="dailyDose">
+            <input type="text" id="numberOfRepeats">
             <br>
+        
+
             <button onClick="addMedication()">Add medication</button>
         <br><br>
         <p>Upadate record</p>
@@ -22,11 +28,6 @@
         <p>Delete record</p>
         <br><br>
         <p>Search record</p>
-
-      
-
-      <script scr="medication.js" language="javascript" type="text/javascript"></script>
-
-
+    
    </body>
 </html>

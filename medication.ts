@@ -21,7 +21,7 @@ interface IMedication {id: number, name: String, dose: number, repeats: number}
 let medicationRecords: Array<IMedication> = new Array<IMedication>();
 
 // Creating the ts variable table to access the html content
-let viewMedicationTable = document.getElementById("MedicationsTable") as HTMLTableElement;
+let viewMedicationTable = document.getElementById("medicationTable") as HTMLTableElement;
 
 // Method to add a new medication
 function addMedication() {
@@ -52,4 +52,9 @@ function addMedication() {
     doseCol.innerHTML = String(dailyDose);        
     repeatsCol.innerHTML = String(numberOfRepeats);    
     
+}
+
+
+function notifyUser() {
+    alert("test");
 }
