@@ -25,10 +25,15 @@ var REPEATS = 3;
  * page or re-open will clean the temporary database medicationRecords.
  */
 var medicationRecords = new Array();
-// Creating the ts variable table to access the html content
+/** Defining the variable that controls the HTML table view.
+ * The viewMedicationTable is loaded according to the search
+ * and new records added or updated to the temp database.
+ */
 var viewMedicationTable = document.getElementById("medicationsTable");
 /** addMedication function
  * Description: Method to add a new medication
+ * Author:      Diego Bueno - d.bueno.da.silva.10@student.scu.edu.au
+ * Date:        30/07/2021
  * Parameters:  none
  * Return:      none
  * */
@@ -62,6 +67,8 @@ function addMedication() {
 }
 /** updateMedication function
  * Description: Method to update a medication
+ * Author:      Diego Bueno - d.bueno.da.silva.10@student.scu.edu.au
+ * Date:        01/08/2021
  * Parameters:  none
  * Return:      none
  * */
@@ -92,6 +99,8 @@ function updateMedication() {
 }
 /** deleteMedication function
  * Description: Method to delete a medication
+ * Author:      Diego Bueno - d.bueno.da.silva.10@student.scu.edu.au
+ * Date:        01/08/2021
  * Parameters:  none
  * Return:      none
  * */
@@ -122,15 +131,16 @@ function deleteMedication() {
 }
 /** searchMedication function
  * Description: Method to search a medication by name or by id
+ * Author:      Diego Bueno - d.bueno.da.silva.10@student.scu.edu.au
+ * Date:        01/08/2021
  * Parameters:  none
  * Return:      none
  * */
 function searchMedication() {
     // Define local variables and casting the content from HTML file.
     var searchedMedicationName = String(document.getElementById("searchedMedicationName").value);
-    var viewSearchResultsTable = document.getElementById("searchResultsTable");
-    var foundItems = false;
-    cleanUpHTMLTable(viewSearchResultsTable); // Clening up the HTML search results table view
+    var foundItems = 0;
+    cleanUpHTMLTable(viewMedicationTable); // Clening up the HTML current table view
     // Searching the search record from the list of medications and adding it to the HTML search results table view
     /** To Do
      * ID must be int number no negative
@@ -144,12 +154,10 @@ function searchMedication() {
     for (var i = 0; i < medicationRecords.length; i++) {
         // Check if there are some medication with name that contains the searched text
         if (medicationRecords[i].name.toLowerCase().indexOf(searchedMedicationName.toLowerCase()) !== -1) {
-            // Updating foundItems variable to define view message
-            if (!foundItems) {
-                foundItems = true;
-            }
-            // Inserting a IMedication into the viewSearchResultsTable
-            var row = viewSearchResultsTable.insertRow(viewSearchResultsTable.rows.length);
+            // Updating foundItems variable to define view message{
+            foundItems++;
+            // Inserting a IMedication into the viewMedicationTable
+            var row = viewMedicationTable.insertRow(viewMedicationTable.rows.length);
             // Creating objs cells elements in the row created above
             var idCol = row.insertCell(ID);
             var nameCol = row.insertCell(NAME);
@@ -163,26 +171,44 @@ function searchMedication() {
             //break; => It shows all found items
         }
     }
-    if (foundItems) {
-        var searchMessage = document.getElementById("searchMessage");
-        searchMessage.innerHTML = "Item found!";
+    if (foundItems > 0) {
+        notifyUser(String(foundItems) + " medication" + (foundItems == 1 ? "" : "s") + " found :)");
+    }
+    else {
+        notifyUser("Medication name " + searchedMedicationName + " did not find :(");
     }
 }
 /** notifyUser function
  * Description: Method to notify the user an event
- * Parameters:  type: String
- * Return:      nome
+ * Author:      Diego Bueno - d.bueno.da.silva.10@student.scu.edu.au
+ * Date:        01/08/2021
+ * Parameters:  message: string - the text to show to the user
+ *              type: string - the type of message to show
+ * Return:      answare: boolean - true in case the user confirm, false instead of.
  * */
-function notifyUser(type) {
-    alert("test");
+function notifyUser(message, type) {
+    if (type === void 0) { type = "alert"; }
+    var answare = false;
+    if (type == null || type == "alert") {
+        alert(message);
+    }
+    else if (type == "confirm") {
+        answare = confirm(message);
+    }
+    else if (type == "prompt") {
+        prompt(message);
+    }
+    return (answare);
 }
 /** cleanUpHTMLTable function
  * Description: Method to clean up an HTML table element
+ * Author:      Diego Bueno - d.bueno.da.silva.10@student.scu.edu.au
+ * Date:        01/08/2021
  * Parameters:  tableToCleanUp: HTMLTableElement
  * Return:      none
  * */
 function cleanUpHTMLTable(tableToCleanUp) {
     for (var i = tableToCleanUp.rows.length; i > 0; i--) {
-        tableToCleanUp.deleteRow(i);
+        tableToCleanUp.deleteRow(i - 1);
     }
 }
