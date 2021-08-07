@@ -22,6 +22,10 @@ const ID = 0;
 const NAME = 1; 
 const DOSE = 2;
 const REPEATS = 3;
+const EDIT = 4;
+const DELETE = 5;
+const EDIT_IMG_BUTTON = "";
+const DELETE_IMG_BUTTON = "";
 
 /**  Defining a array to save the medication control objects.
  * medicationRecords is the master database, since this app
@@ -74,12 +78,15 @@ function addMedication() {
     let doseCol    = row.insertCell(DOSE) as HTMLTableCellElement;
     let repeatsCol = row.insertCell(REPEATS) as HTMLTableCellElement;
 
-    // 
+    // Inserting the inputted values into the View HTML table
     idCol.innerHTML = String(identifier);
     nameCol.innerHTML = medicationName;
     doseCol.innerHTML = String(dailyDose);        
     repeatsCol.innerHTML = String(numberOfRepeats);    
-    
+
+    // Adding options of updating or deleting the new row added.
+    addUpdateAndDeleteOptions(viewMedicationTable, viewMedicationTable.rows.length - 1 )
+
 }
 
 /** updateMedication function
@@ -207,8 +214,6 @@ function updateMedication() {
             nameCol.innerHTML = String(medicationRecords[i].name);
             doseCol.innerHTML = String(medicationRecords[i].dose);        
             repeatsCol.innerHTML = String(medicationRecords[i].repeats);    
-        
-            //break; => It shows all found items
         }
     } 
 
@@ -256,4 +261,60 @@ function cleanUpHTMLTable(tableToCleanUp: HTMLTableElement){
     for (let i=tableToCleanUp.rows.length; i>0;i--) {
         tableToCleanUp.deleteRow(i-1);
     }
+}
+
+/** clearFilter function
+ * Description: Method to clean up filters in the HTML View table element
+ * Author:      Diego Bueno - d.bueno.da.silva.10@student.scu.edu.au
+ * Date:        06/08/2021
+ * Parameters:  tableToShow: HTMLTableElement
+ * Return:      none
+ * */ 
+ function clearFilter(viewMedicationTable: HTMLTableElement) {
+
+    // Clening up the HTML current table view with filters    
+    cleanUpHTMLTable(viewMedicationTable); 
+
+    // Clening up the text field search
+    let searchedMedicationField = document.getElementById("searchedMedicationName") as HTMLInputElement;
+    searchedMedicationField.value = "";
+
+    for(let i=0; i< medicationRecords.length; i++) {
+
+        // Inserting a IMedication into the viewMedicationTable
+        let row = viewMedicationTable.insertRow(viewMedicationTable.rows.length) as HTMLTableRowElement;
+
+        // Creating objs cells elements in the row created above
+        let idCol      = row.insertCell(ID) as HTMLTableCellElement;
+        let nameCol    = row.insertCell(NAME) as HTMLTableCellElement;
+        let doseCol    = row.insertCell(DOSE) as HTMLTableCellElement;
+        let repeatsCol = row.insertCell(REPEATS) as HTMLTableCellElement;
+            
+        // Updating the HTML view
+        idCol.innerHTML = String(medicationRecords[i].id);
+        nameCol.innerHTML = String(medicationRecords[i].name);
+        doseCol.innerHTML = String(medicationRecords[i].dose);        
+        repeatsCol.innerHTML = String(medicationRecords[i].repeats);    
+    }
+ }
+
+ /** addUpdateAndDeleteOptions function
+ * Description: Method to add an update and delete buttons to each row in the view HTML table element
+ * Author:      Diego Bueno - d.bueno.da.silva.10@student.scu.edu.au
+ * Date:        06/08/2021
+ * Parameters:  tableToAdd: HTMLTableElement
+ *             
+ * Return:      none
+ * */ 
+function addUpdateAndDeleteOptions(tableToAdd: HTMLTableElement, rowToAddOptions: number ){
+
+    if (tableToAdd.rows.length > 0 && rowToAddOptions >= 0) {
+        let editButton    = tableToAdd.rows[rowToAddOptions].insertCell(EDIT) as HTMLTableCellElement;
+        let deleteButton = tableToAdd.rows[rowToAddOptions].insertCell(DELETE) as HTMLTableCellElement;
+
+        editButton.innerHTML = '<button onClick="updateMedication()" >Edit</button>';
+        deleteButton.innerHTML = '<button onClick="deleteMedication()" >Delete</button>';
+
+    }
+
 }
