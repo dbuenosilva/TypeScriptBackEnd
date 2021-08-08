@@ -11,7 +11,7 @@
 
    <body onload="loadNextID()">
         <h1>Medications control</h1>
-        
+        <hr>        
          <table>
             <tr>
                <td>
@@ -25,11 +25,15 @@
                </td>                               
             </tr>
          </table>
+         <hr>
+         <table id="medicationsTable">
 
-         <table id="medicationsTable"></table>
+         </table>
+
         <!-- medicationsTable is dynamically build here by the medication.js -->
 
         <br>
+        <hr>
         <br>
             <input type="text" id="identifier" placeholder="Identifier">
             <input type="text" id="medicationName" placeholder="Medication">
@@ -48,4 +52,7 @@
                </tr>
             </table> 
    </body>
+   <hr>
+   <a href="http://localhost:8080/appointments.html"> >> Go to Appointments by GP << </a>
+
 </html>
