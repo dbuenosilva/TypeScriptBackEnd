@@ -100,13 +100,6 @@ function addMedication() {
     let medication: IMedication = {id: identifierValue, name: medicationValue, dose: dailyDoseValue, repeats: numberOfRepeatsValue}
 
     // Adding to new created instance to the list of medications
-
-    /** To Do
-     * ID must be int number no negative
-     * ID is identity and can is can't repeat
-     * 
-     */
-
     medicationRecords.push(medication)
 
     // Creating a obj row element
