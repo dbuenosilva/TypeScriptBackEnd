@@ -15,37 +15,30 @@
          <table>
             <tr>
                <td>
-                  <input type="text" id="searchedAppointmentsName" placeholder="GP name you are looking for">
+                  <input type="text" id="searchedGpName" placeholder="GP name you are looking for">
                </td>
                <td>
-                  <button onClick="searchAppointments()" >Search</button>        
+                  <button onClick="searchAppointmentByGpName()" >Search</button>        
                </td>
                <td>
-                  <button onClick="clearFilter()" >Clear filter</button>        
+                  <button onClick="clearAppointmentFilter()" >Clear filter</button>        
                </td>                               
             </tr>
          </table>
          <hr>
-         <table id="appointmentsTable"></table>
-        <!-- appointmentsTable is dynamically build here by the appointments.js -->
+         <table id="bookedAppointmentsTable"></table>
+        <!-- bookedAppointmentsTable is dynamically build here by the appointments.js -->
 
         <br>
         <hr>
         <br>
-            <input type="text" id="identifier" placeholder="Identifier">
-            <input type="text" id="gpname" placeholder="GP name">
-         <!-- type="date" and "time" is not supported in Safari or Internet Explorer 11 (or earlier), so using this placeholder here -->
-            <input type="date" id="date" placeholder="Date" placeholder="dd/mm/yyyy">
-            <input type="time" id="time" placeholder="--:-- --">
-            <br>
-        
+            <select name="selectAppointments" id="selectAppointments">
+            </select>
+
             <table>
                <tr>
                   <td>
                      <button onClick="addAppointment()">Add an Appointment</button>
-                  </td>
-                  <td>
-                     <button onClick="updateAppointment()">Update an Appointment</button>
                   </td>                           
                </tr>
             </table> 
